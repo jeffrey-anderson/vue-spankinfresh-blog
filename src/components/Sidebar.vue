@@ -6,10 +6,10 @@
             <div class="row ">
                 <div class="col">
                     <h2>Books</h2>
-                    <p>Spring Web Essentials is a full-length e-book that will teach you how to build modern industrial-grade web services with Spring Boot supporting JavaScript frameworks like Angular, React, and Vue.</p>
+                    <p>All our favorite SpankinFresh recipe ideas in one book! Order yours today.</p>
                     <div class="text-center">
                         <a href="https://leanpub.com/springwebessentials">
-                        <img width="100%" src="../assets/epub-cover-2.jpg"
+                        <img width="100%" src="../assets/BookCover.jpg"
                              alt="Spring Web Essentials book cover">
                         </a>
                     </div>

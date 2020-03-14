@@ -1,0 +1,11 @@
+export const ADD_FLASH_MESSAGE = 'addFlashMessage';
+export const CLEAR_FLASH_MESSAGES = 'clearFlashMessages';
+export const GET_ARTICLES = 'getArticles';
+export const GET_CATEGORIES = 'getCategories';
+export const GET_TOC = 'getTOC';
+export const ADD_ERROR_MESSAGE = 'addErrorMessage';
+export const CLEAR_ERROR_MESSAGES = 'clearErrorMessages';
+export const DELETE_ARTICLE = "deleteArticle";
+export const UPDATE_TOC = "updateToc";
+export const UPDATE_ARTICLES = "updateArticles";
+export const ADD_ARTICLE = "addArticle";

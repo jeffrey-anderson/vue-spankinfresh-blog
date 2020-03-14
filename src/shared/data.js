@@ -1,6 +1,5 @@
 import * as axios from 'axios';
 import {API} from './config';
-import Vue from 'vue';
 const statusDescriptions = new Map([
     [400, 'Bad Request'],
     [401, 'Unauthorized'],
@@ -18,8 +17,7 @@ const statusDescriptions = new Map([
 export const getAllArticles = async function () {
     try {
         const response = await axios.get(`${API}/articles`);
-        let data = parseList(response);
-        return data;
+        return parseList(response);
     } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error);
@@ -30,8 +28,7 @@ export const getAllArticles = async function () {
 export const getCategories = async function () {
     try {
         const response = await axios.get(`${API}/categories`);
-        let data = parseList(response);
-        return data;
+        return parseList(response);
     } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error);
@@ -46,8 +43,7 @@ export const getArticlesByCategory = async function (category) {
                 categoryName: category
             }
         });
-        let data = parseList(response);
-        return data;
+        return parseList(response);
     } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error);
@@ -68,9 +64,8 @@ export const getArticleById = async function (id) {
 
 export const getArticleList = async function () {
     try {
-        const response = await axios.get(`${API}/summary/articles`);
-        let data = parseList(response);
-        return data;
+        const response = await axios.get(`${API}/articles`);
+        return parseList(response);
     } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error);
@@ -91,13 +86,7 @@ const parseList = response => {
 
 const deleteArticle = async function (id) {
     try {
-        let accessToken = await Vue.prototype.$auth.getAccessToken();
-        const config = {
-            headers: {
-                'Authorization': accessToken,
-            }
-        };
-        const response = await axios.delete(`${API}/articles/${id}`, config);
+        const response = await axios.delete(`${API}/articles/${id}`);
         return {
             statusCode: response.status,
             statusMessage: response.statusText,
@@ -110,13 +99,7 @@ const deleteArticle = async function (id) {
 
 const updateArticle = async function (article) {
     try {
-        let accessToken = await Vue.prototype.$auth.getAccessToken();
-        const config = {
-            headers: {
-                'Authorization': accessToken,
-            }
-        };
-        const response = await axios.put(`${API}/articles/${article.id}`, article, config);
+        const response = await axios.put(`${API}/articles/${article.id}`, article);
         return {
             statusCode: response.status,
             statusMessage: response.statusText,
@@ -129,13 +112,7 @@ const updateArticle = async function (article) {
 
 const createArticle = async function (article) {
     try {
-        let accessToken = await Vue.prototype.$auth.getAccessToken();
-        const config = {
-            headers: {
-                'Authorization': accessToken,
-            }
-        };
-        const response = await axios.post(`${API}/articles`, article, config);
+        const response = await axios.post(`${API}/articles`, article);
         return {
             statusCode: response.status,
             statusMessage: response.statusText,

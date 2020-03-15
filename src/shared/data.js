@@ -38,7 +38,7 @@ export const getCategories = async function () {
 
 export const getArticlesByCategory = async function (category) {
     try {
-        const response = await axios.get(`${API}/categories`, {
+        const response = await axios.get(`${API}/articles/category`, {
             params: {
                 categoryName: category
             }

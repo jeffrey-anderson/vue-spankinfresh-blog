@@ -5,6 +5,7 @@ import {dataService} from "../shared";
 import {
   GET_ARTICLES, ADD_FLASH_MESSAGE, CLEAR_FLASH_MESSAGES, DELETE_ARTICLE, UPDATE_ARTICLES,
     ADD_ERROR_MESSAGE, CLEAR_ERROR_MESSAGES, GET_CATEGORIES, GET_TOC, UPDATE_TOC, ADD_ARTICLE,
+    GET_AUTHORS
 } from "./mutation-types";
 
 
@@ -12,6 +13,7 @@ Vue.use(Vuex);
 
 const state = {
   articles: [],
+  authors: [],
   toc: [],
   categories: [],
   flashMessages: [],
@@ -36,6 +38,9 @@ const mutations = {
   },
   [GET_CATEGORIES](state, categories) {
     state.categories = categories;
+  },
+  [GET_AUTHORS](state, authors) {
+    state.authors = authors;
   },
   [GET_ARTICLES](state, articles) {
     state.articles = articles;
@@ -75,6 +80,12 @@ const actions = {
     if (state.toc.length === 0) {
       const toc = await dataService.getArticleList();
       commit(GET_TOC, toc);
+    }
+  },
+  async getAuthorsAction({ commit }) {
+    if (state.authors.length === 0) {
+      const authors = await dataService.getAuthors();
+      commit(GET_AUTHORS, authors);
     }
   },
   async getCategoriesAction({ commit }) {

@@ -8,6 +8,8 @@
             <p><span>{{article.datePosted | fancyDate }}</span> &mdash;
                 <span class="lead"><a class="text-dark">{{article.category}}</a></span>
             </p>
+            <p v-if="article.author">by {{article.author.firstName}} {{article.author.lastName}}
+            </p>
             <div class="row">
                 <div class="col-sm" v-html="content">
                 </div>

@@ -37,6 +37,17 @@
         </div>
 
         <div class="form-group row">
+            <label for="blogTitle" v-bind:class="{'col-sm-2 col-form-label':true, 'text-danger' : titleInvalid}">Author:</label>
+            <div class="col-sm-10">
+                <select class="custom-select" v-model="article.author">
+                    <option v-for="author in authors" v-bind:key="author.id" v-bind:value="author">
+                        {{ author.firstName }} {{ author.lastName }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
             <label for="contentField" v-bind:class="{'col-sm-2 col-form-label':true, 'text-danger' : contentInvalid}">Content:</label>
             <div class="col-sm-10">
                 <nav>
@@ -75,7 +86,7 @@
 </template>
 
 <script>
-    import {mapActions} from "vuex";
+    import {mapActions, mapState} from "vuex";
 
     var md = require('markdown-it')({
         html: true,
@@ -98,12 +109,13 @@
             },
         },
         computed: {
+            ...mapState(['authors']),
             content() {
                 return md.render(this.article.content);
             },
         },
         methods: {
-            ...mapActions(['getTocAction', 'updateArticleAction', 'createArticleAction']),
+            ...mapActions(['getTocAction', 'updateArticleAction', 'createArticleAction', 'getAuthorsAction']),
             cancelChanges() {
                 this.$router.push({ name: 'toc' });
             },

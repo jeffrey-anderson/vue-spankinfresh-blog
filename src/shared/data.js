@@ -35,6 +35,16 @@ export const getCategories = async function () {
     }
 };
 
+export const getAuthors = async function () {
+    try {
+        const response = await axios.get(`${API}/authors`);
+        return parseList(response);
+    } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+    }
+};
+
 
 export const getArticlesByCategory = async function (category) {
     try {
@@ -172,5 +182,6 @@ export const dataService = {
     deleteArticle,
     updateArticle,
     createArticle,
+    getAuthors,
 };
 

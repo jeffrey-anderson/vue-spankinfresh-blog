@@ -9,3 +9,4 @@ export const DELETE_ARTICLE = "deleteArticle";
 export const UPDATE_TOC = "updateToc";
 export const UPDATE_ARTICLES = "updateArticles";
 export const ADD_ARTICLE = "addArticle";
+export const GET_AUTHORS = 'getAuthors';

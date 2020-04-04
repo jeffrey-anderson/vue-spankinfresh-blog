@@ -81,9 +81,10 @@
             await this.loadArticles();
         },
         methods: {
-            ...mapActions(['getTocAction', 'deleteArticleAction']),
+            ...mapActions(['getTocAction', 'deleteArticleAction', 'getAuthorsAction']),
             async loadArticles() {
                 await this.getTocAction();
+                await this.getAuthorsAction();
             },
             askToDelete(article) {
                 this.articleToDelete = article;

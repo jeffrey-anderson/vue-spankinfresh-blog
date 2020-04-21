@@ -32,6 +32,8 @@
 
             </ul>
         </div>
+        <button class="btn btn-primary my-2 my-sm-0" v-if='authenticated' v-on:click='logout' id='logout-button'><i class="fas fa-sign-out-alt"></i> Logout </button>
+        <button class="btn btn-primary my-2 my-sm-0" v-else v-on:click='login' id='login-button'><i class="fas fa-sign-in-alt"></i> Login </button>
     </nav>
 
     </div>
@@ -42,11 +44,33 @@
 
     export default {
         name: "Navbar",
+        data: function () {
+            return {
+                authenticated: false
+            }
+        },
         async created () {
+            this.isAuthenticated()
             await this.loadCategories();
+        },
+        watch: {
+            // Everytime the route changes, check for auth status
+            '$route': 'isAuthenticated'
         },
         methods: {
             ...mapActions(['getCategoriesAction']),
+            async isAuthenticated () {
+                this.authenticated = await this.$auth.isAuthenticated()
+            },
+            login () {
+                this.$auth.loginRedirect('/')
+            },
+            async logout () {
+                await this.$auth.logout()
+                await this.isAuthenticated()
+                // Navigate back to home
+                this.$router.push({ path: '/' })
+            },
             async loadCategories() {
                 await this.getCategoriesAction();
             },

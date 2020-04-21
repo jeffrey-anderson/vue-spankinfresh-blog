@@ -9,7 +9,7 @@
                     <th scope="col">Category</th>
                     <th scope="col">Date Posted</th>
                     <th scope="col">Title</th>
-                    <th scope="col"></th>
+                    <th v-if="authenticated" scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -17,7 +17,7 @@
                     <td>{{ article.category}}</td>
                     <td>{{ article.datePosted | prettyDate }}</td>
                     <td><router-link :to="{ name: 'articles', params: { id: article.id } }">{{ article.title}}</router-link></td>
-                    <td class="row">
+                    <td v-if="authenticated" class="row">
                         <button type="button" class="btn btn-outline-dark mr-1" data-toggle="modal" data-target="#exampleModal" @click="askToDelete(article)">
                             <i class="fas fa-trash"></i>
                         </button>
@@ -28,7 +28,7 @@
                 </tr>
                 </tbody>
             </table>
-            <p class="lead text-center">
+            <p v-if="authenticated" class="lead text-center">
                 <router-link class="btn btn-outline-primary btn-lg" :to="{ name: 'edit-article', params: { id: 0 } }">Create a New Article</router-link>
             </p>
             <Modal
@@ -65,6 +65,7 @@
             return {
                 articleToDelete: null,
                 showModal: false,
+                authenticated: false,
             };
         },
         components: {
@@ -79,12 +80,16 @@
         },
         async created() {
             await this.loadArticles();
+            this.isAuthenticated();
         },
         methods: {
             ...mapActions(['getTocAction', 'deleteArticleAction', 'getAuthorsAction']),
             async loadArticles() {
                 await this.getTocAction();
                 await this.getAuthorsAction();
+            },
+            async isAuthenticated() {
+                this.authenticated = await this.$auth.isAuthenticated()
             },
             askToDelete(article) {
                 this.articleToDelete = article;

@@ -2,8 +2,18 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import TableOfContents from "../components/TableOfContents";
 import PageNotFound from "../views/PageNotFound";
+import Auth from '@okta/okta-vue'
+import {OAUTH_ISSUER, CLIENT_ID} from '../shared/config';
 
 Vue.use(VueRouter);
+
+Vue.use(Auth, {
+  issuer: `${OAUTH_ISSUER}`,
+  clientId: `${CLIENT_ID}`,
+  redirectUri: window.location.origin + '/implicit/callback',
+  scopes: ['openid', 'profile', 'email'],
+  pkce: true
+});
 
 const parseProps = r => ({ id: parseInt(r.params.id) });
 
@@ -23,6 +33,9 @@ const routes = [
     path: '/edit/article/:id',
     name: 'edit-article',
     props: parseProps,
+    meta: {
+      requiresAuth: true
+    },
     component: () => import(/* webpackChunkName: "core" */ '../views/EditArticle.vue')
   },
   {
@@ -38,12 +51,8 @@ const routes = [
     component: () => import(/* webpackChunkName: "core" */ '../views/Category.vue')
   },
   {
-    path: '/jeff',
-    redirect: { name: 'home' }
-  },
-  {
-    path: '/jeff/article/:id',
-    redirect: { name: 'articles' }
+    path: '/implicit/callback',
+    component: Auth.handleCallback()
   },
   {
     path: '*',
@@ -56,5 +65,7 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
+
+router.beforeEach(Vue.prototype.$auth.authRedirectGuard())
 
 export default router

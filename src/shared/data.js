@@ -1,5 +1,7 @@
 import * as axios from 'axios';
 import {API} from './config';
+import Vue from 'vue';
+
 const statusDescriptions = new Map([
     [400, 'Bad Request'],
     [401, 'Unauthorized'],
@@ -96,7 +98,13 @@ const parseList = response => {
 
 const deleteArticle = async function (id) {
     try {
-        const response = await axios.delete(`${API}/articles/${id}`);
+        let accessToken = await Vue.prototype.$auth.getAccessToken();
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            }
+        };
+        const response = await axios.delete(`${API}/articles/${id}`,config);
         return {
             statusCode: response.status,
             statusMessage: response.statusText,
@@ -109,7 +117,13 @@ const deleteArticle = async function (id) {
 
 const updateArticle = async function (article) {
     try {
-        const response = await axios.put(`${API}/articles/${article.id}`, article);
+        let accessToken = await Vue.prototype.$auth.getAccessToken();
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            }
+        };
+        const response = await axios.put(`${API}/articles/${article.id}`, article, config);
         return {
             statusCode: response.status,
             statusMessage: response.statusText,
@@ -122,7 +136,13 @@ const updateArticle = async function (article) {
 
 const createArticle = async function (article) {
     try {
-        const response = await axios.post(`${API}/articles`, article);
+        let accessToken = await Vue.prototype.$auth.getAccessToken();
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            }
+        };
+        const response = await axios.post(`${API}/articles`, article, config);
         return {
             statusCode: response.status,
             statusMessage: response.statusText,

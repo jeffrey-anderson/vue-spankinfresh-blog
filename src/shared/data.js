@@ -74,7 +74,7 @@ export const getArticleById = async function (id) {
 
 export const getArticleList = async function () {
     try {
-        const response = await axios.get(`${API}/articles`);
+        const response = await axios.get(`${API}/summary/articles`);
         return parseList(response);
     } catch (error) {
         // eslint-disable-next-line no-console

@@ -10,7 +10,7 @@ Vue.use(VueRouter);
 Vue.use(Auth, {
   issuer: `${OAUTH_ISSUER}`,
   clientId: `${CLIENT_ID}`,
-  redirectUri: window.location.origin + '/implicit/callback',
+  redirectUri: window.location.origin + '/login/callback',
   scopes: ['openid', 'profile', 'email'],
   pkce: true
 });
@@ -51,7 +51,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "core" */ '../views/Category.vue')
   },
   {
-    path: '/implicit/callback',
+    path: '/login/callback',
     component: Auth.handleCallback()
   },
   {

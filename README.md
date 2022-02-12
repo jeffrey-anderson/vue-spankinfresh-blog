@@ -37,7 +37,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ```
 docker buildx create --name mybuilder
 docker buildx use mybuilder
- docker buildx inspect --bootstrap
+docker buildx inspect --bootstrap
 ```
 
 ### Build and push

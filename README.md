@@ -1,24 +1,5 @@
 # SpankinFresh Farm Market Blog
 
-## Project setup
-```
-npm install
-```
+## This repository is archived
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Use [https://github.com/jeffrey-anderson/vue-spankinfresh-blog-v3][(https://github.com/jeffrey-anderson/vue-spankinfresh-blog-v3) instead.
